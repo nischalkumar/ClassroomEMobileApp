@@ -14,8 +14,8 @@
 
 var requestToken = "";
 var accessToken = "";
-var clientId = "141608909723-fos0vtpevj629s22urfcvmdke65ig7cn.apps.googleusercontent.com";
-var clientSecret = "mJD2proyzNy14PLK-NFStTmQ";
+var clientId = "clientapp" ; //"141608909723-fos0vtpevj629s22urfcvmdke65ig7cn.apps.googleusercontent.com";
+var clientSecret = "123456" ;//"mJD2proyzNy14PLK-NFStTmQ";
 
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource'])
@@ -34,12 +34,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+  $httpProvider.defaults.headers.common['Authorization'] = '';
+
   $stateProvider
 
     .state('login', {

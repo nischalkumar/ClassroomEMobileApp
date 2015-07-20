@@ -4,22 +4,35 @@ angular.module('starter.controllers', [])
  
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
  
+
+
+// http://104.236.116.175:8090/oauth/token -H "Accept: application/json" -d "password=check&username=student&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp"curl -X POST -vu clientapp:123456
+
     $scope.login = function() {
-        var ref = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=http://localhost:8100/callback&scope=https://www.googleapis.com/auth/urlshortener&approval_prompt=force&response_type=code&access_type=offline', '_blank', 'location=no');
-        ref.addEventListener('loadstart', function(event) { 
-            if((event.url).startsWith("http://localhost:8100/callback")) {
-                requestToken = (event.url).split("code=")[1];
-                $http({method: "post", url: "https://accounts.google.com/o/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost:8100/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
-                    .success(function(data) {
+       // var ref = window.open('http://104.236.116.175:8090/oauth/token -H \"Accept: application/json\" -d \"password=check&username=student&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp');
+       // ref.addEventListener('loadstart', function(event) { 
+       //     if((event.url).startsWith("http://localhost:8100/callback")) {
+       //         requestToken = (event.url).split("code=")[1];
+              //  $http({method: "post", url: "https://accounts.google.com/o/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost:8100/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
+                $http({
+                  method: "post", 
+                  url: "http://104.236.116.175:8090/oauth/token", 
+                  data:  "client_id=" + clientId + "&client_secret=" + clientSecret + "password=check&username=student&grant_type=password" + "&scope=read%20write",
+                  withCredentials: true,
+                  headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                    }
+                })                
+                   .success(function(data) {
                         accessToken = data.access_token;
                         $location.path("/secure");
                     })
                     .error(function(data, status) {
                         alert("ERROR: " + data);
                     });
-                ref.close();
-            }
-        });
+         //       ref.close();
+        //    }
+       // });
     }
  
     if (typeof String.prototype.startsWith != 'function') {
