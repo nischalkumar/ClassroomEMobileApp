@@ -5,6 +5,19 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
+
+// Client ID  
+// 141608909723-fos0vtpevj629s22urfcvmdke65ig7cn.apps.googleusercontent.com
+// Client secret 
+// mJD2proyzNy14PLK-NFStTmQ
+
+var requestToken = "";
+var accessToken = "";
+var clientId = "141608909723-fos0vtpevj629s22urfcvmdke65ig7cn.apps.googleusercontent.com";
+var clientSecret = "mJD2proyzNy14PLK-NFStTmQ";
+
+
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource'])
 
 .run(function($ionicPlatform) {
@@ -28,6 +41,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+
+    .state('login', {
+                url: '/login',
+                templateUrl: 'templates/login.html',
+                controller: 'LoginController'
+            })
+    .state('secure', {
+                url: '/secure',
+                templateUrl: 'templates/secure.html',
+                controller: 'SecureController'
+            })
 
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -78,6 +102,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
 });
