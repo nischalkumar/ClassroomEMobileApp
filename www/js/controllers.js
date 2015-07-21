@@ -14,7 +14,12 @@ angular.module('starter.controllers', [])
        //     if((event.url).startsWith("http://localhost:8100/callback")) {
        //         requestToken = (event.url).split("code=")[1];
               //  $http({method: "post", url: "https://accounts.google.com/o/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost:8100/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
-                $http({
+       
+       // var callbackURL = 'http://104.236.116.175:8090/oauth/token -H \"Accept: application/json\" -d \"password=check&username=student&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp'
+      // var callbackURL = "http://104.236.116.175:8090/oauth/token" ;
+
+                $http
+                ({
                   method: "post", 
                   url: "http://104.236.116.175:8090/oauth/token", 
                   data:  "client_id=" + clientId + "&client_secret=" + clientSecret + "password=check&username=student&grant_type=password" + "&scope=read%20write",
